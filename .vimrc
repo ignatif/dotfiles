@@ -44,6 +44,9 @@ Plugin 'vim-airline/vim-airline-themes'
 "gcc to comment a line
 Plugin 'tpope/vim-commentary'
 
+"folding
+Plugin 'vim-scripts/restore_view.vim'
+
 call vundle#end()
 filetype plugin indent on
 " ________________________________________________
@@ -91,6 +94,14 @@ set clipboard=unnamedplus
 " ________________________________________________
 " PLUGINS SETTINGS !
 " ________________________________________________
+
+"folding
+set viewoptions=cursor,folds,slash,unix
+"let g:skipview_files = ['*\.vim']
+"set foldmethod=indent   
+"set foldnestmax=10
+"set nofoldenable
+"set foldlevel=2
 
 "eslint
 let g:syntastic_check_on_open=0
@@ -164,6 +175,11 @@ inoremap []     []
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
+
+" Folding
+inoremap <F9> <C-O>za
+nnoremap <F9> za
+onoremap <F9> <C-C>za
 
 " ________________________________________________
 " VISUAL SETTINGS
