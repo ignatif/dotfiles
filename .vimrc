@@ -1,13 +1,5 @@
-" _______________________________________________
-" GVIM SETTINGS
-" _______________________________________________
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-set guiheadroom=0
-
 set nocompatible
+set t_Co=256
 " _______________________________________________
 " PLUGINS
 " _______________________________________________
@@ -95,17 +87,12 @@ set clipboard=unnamedplus
 " PLUGINS SETTINGS !
 " ________________________________________________
 
-"folding
 set viewoptions=cursor,folds,slash,unix
-"let g:skipview_files = ['*\.vim']
-"set foldmethod=indent   
-"set foldnestmax=10
-"set nofoldenable
-"set foldlevel=2
 
 "eslint
 let g:syntastic_check_on_open=0
-let g:jsx_ext_required = 0  
+let g:syntastic_check_on_wq = 1
+let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint_d'
 
@@ -115,8 +102,8 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 "let g:airline_powerline_fonts = 1
-let g:airline_left_sep='卐'
-let g:airline_right_sep='卐'
+let g:airline_left_sep='▶'
+let g:airline_right_sep='◀'
 let g:airline#extensions#tabline#left_sep = '▶'
 let g:airline#extensions#tabline#left_alt_sep = '▷'
 
@@ -149,8 +136,8 @@ vnoremap ; :
 inoremap jf <esc>
 
 "tabs switching
-nmap <C-K> :bn<CR>
-nmap <C-J> :bp<CR>
+nmap <C-k> :bn<CR>
+nmap <C-j> :bp<CR>
 
 "stop highlighting the search results
 nmap <esc> :noh<CR>
@@ -176,17 +163,11 @@ inoremap []     []
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
 
-" Folding
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-
 " ________________________________________________
 " VISUAL SETTINGS
 " ________________________________________________
 
 set background=dark
-set guifont=DejaVu\ Sans\ Mono\ 9.7
 colorscheme spacegray
 let g:airline_theme='tomorrow'
 
