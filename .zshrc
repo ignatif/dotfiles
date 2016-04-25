@@ -86,3 +86,7 @@ DEFAULT_USER="ignatif"
 export WORKON_HOME=~/.Envs
 source /usr/local/bin/virtualenvwrapper.sh
 alias project_name='workon env_name'
+export TERM="screen-256color"
+
+export DELIVERABLE_SETTINGS=~/work/deliverable/backend/settings/base.py
+export DELIVERABLE_TEST_SETTINGS=~/work/deliverable/backend/settings/test.py

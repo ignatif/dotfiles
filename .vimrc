@@ -1,15 +1,14 @@
 set nocompatible
-set t_Co=256
 " _______________________________________________
 " PLUGINS
 " _______________________________________________
 filetype off
- 
+
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
- 
+
 Plugin 'VundleVim/Vundle.vim'
- 
+
 "must have
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
@@ -28,9 +27,10 @@ Plugin 'xolox/vim-session'
 Plugin 'easymotion/vim-easymotion'
 
 "appearance
-Plugin 'ajh17/Spacegray.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'flazz/vim-colorschemes'
 
 "gc to comment a block in visual 
 "gcc to comment a line
@@ -101,11 +101,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_x = ''
 let g:airline_section_y = ''
-"let g:airline_powerline_fonts = 1
-let g:airline_left_sep='▶'
-let g:airline_right_sep='◀'
-let g:airline#extensions#tabline#left_sep = '▶'
-let g:airline#extensions#tabline#left_alt_sep = '▷'
+let g:airline_powerline_fonts = 1
 
 "vim sessions settings
 let g:session_autosave = 'yes'
@@ -167,7 +163,6 @@ nnoremap <leader><leader> <c-^>
 " VISUAL SETTINGS
 " ________________________________________________
 
+let g:airline_theme='term'
 set background=dark
-colorscheme spacegray
-let g:airline_theme='tomorrow'
-
+colorscheme hybrid_material
