@@ -163,6 +163,6 @@ nnoremap <leader><leader> <c-^>
 " VISUAL SETTINGS
 " ________________________________________________
 
-let g:airline_theme='term'
+let g:airline_theme='tomorrow'
 set background=dark
 colorscheme hybrid_material
