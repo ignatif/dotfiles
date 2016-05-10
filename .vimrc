@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 "must have
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
@@ -77,6 +77,8 @@ set shiftround "tab moves to the closest 'tab stop'
 set autoindent
 set smartindent
 
+set cursorline
+
 "get rid of useless spaces
 set nojoinspaces
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -111,6 +113,11 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
 let NERDTreeQuitOnOpen=1
+
+"neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " ________________________________________________
 " KEY BINDINGS
@@ -166,3 +173,5 @@ nnoremap <leader><leader> <c-^>
 let g:airline_theme='tomorrow'
 set background=dark
 colorscheme hybrid_material
+
+nmap ,d :b#<bar>bd#<CR>
