@@ -174,4 +174,4 @@ let g:airline_theme='tomorrow'
 set background=dark
 colorscheme hybrid_material
 
-nmap ,d :b#<bar>bd#<CR>
+n
