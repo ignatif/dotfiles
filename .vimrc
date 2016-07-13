@@ -13,12 +13,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'jiangmiao/auto-pairs'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
- 
+
 "session support 
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
@@ -27,20 +29,21 @@ Plugin 'xolox/vim-session'
 Plugin 'easymotion/vim-easymotion'
 
 "appearance
-Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'kristijanhusak/vim-hybrid-material'
 
 "gc to comment a block in visual 
 "gcc to comment a line
 Plugin 'tpope/vim-commentary'
 
-"folding
-Plugin 'vim-scripts/restore_view.vim'
+
+Plugin 'chriskempson/vim-tomorrow-theme'
 
 call vundle#end()
 filetype plugin indent on
+
 " ________________________________________________
 " COMMON SETTINGS
 " ________________________________________________
@@ -84,7 +87,7 @@ set nojoinspaces
 set list listchars=tab:»·,trail:·,nbsp:·
 
 " same buffer in all windows
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 " ________________________________________________
 " PLUGINS SETTINGS !
 " ________________________________________________
@@ -92,11 +95,11 @@ set clipboard=unnamedplus
 set viewoptions=cursor,folds,slash,unix
 
 "eslint
-let g:syntastic_check_on_open=0
+let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq = 1
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint_d'
+let g:syntastic_javascript_eslint_exec = 'eslint'
 
 "airline stuff
 let g:airline#extensions#tabline#enabled = 1
@@ -146,32 +149,33 @@ nmap <C-j> :bp<CR>
 nmap <esc> :noh<CR>
 
 "easymotion on ctrl+s
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 map <C-s> <Plug>(easymotion-bd-f)
 nmap <C-s> <Plug>(easymotion-overwin-f)
 
-"autobrackets
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ((     (
-inoremap ()     ()
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
+"support russian keymap
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-" Switch between the last two files
-nnoremap <leader><leader> <c-^>
 
 " ________________________________________________
 " VISUAL SETTINGS
 " ________________________________________________
 
-let g:airline_theme='tomorrow'
+let g:airline_theme='hybrid'
 set background=dark
-colorscheme hybrid_material
+colorscheme hybrid
 
-n
+nmap ,d :b#<bar>bd#<CR>
+set clipboard=unnamed
+
+" check if project has his own vim config
+let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+if matchstr(local_eslint, "^\/\\w") == ''
+    let local_eslint = getcwd() . "/" . local_eslint
+endif
+if executable(local_eslint)
+    let g:syntastic_javascript_eslint_exec = local_eslint
+endif
+
+"disable sound bells
+set vb
