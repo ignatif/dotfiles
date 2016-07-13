@@ -1,10 +1,11 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/ignatif/.oh-my-zsh
+export ZSH=/Users/ignatif/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# ZSH_THEME="terminalparty"
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -49,11 +50,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git, osx, sudo)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,11 +83,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER="ignatif"
-export WORKON_HOME=~/.Envs
-source /usr/local/bin/virtualenvwrapper.sh
-alias project_name='workon env_name'
-export TERM="screen-256color"
 
-export DELIVERABLE_SETTINGS=~/work/deliverable/backend/settings/base.py
-export DELIVERABLE_TEST_SETTINGS=~/work/deliverable/backend/settings/test.py
+export NVM_DIR="/Users/ignatif/.nvm"
+export TERM="screen-256color"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+open_by_browser(){ open -a $1 $2}
+alias chrome='open_by_browser "Google Chrome"'
