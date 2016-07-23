@@ -1,11 +1,8 @@
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-set guiheadroom=0
+set guioptions-=m  " remove menu bar
+set guioptions-=T  " remove toolbar
+set guioptions-=r  " remove right-hand scroll bar
+set guioptions-=L  " remove left-hand scroll bar
 
-set background=dark
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline\ 9.8
-colorscheme spacegray
-let g:airline_theme='tomorrow'
-
+set macligatures " for OS X only
+" set guifont=Meslo\ LG\ S\ for\ Powerline:h12
+set guifont=Fira\ Code:h12
