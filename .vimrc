@@ -1,7 +1,7 @@
 set nocompatible
-" _______________________________________________
+"
 " PLUGINS
-" _______________________________________________
+"
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -15,15 +15,12 @@ Plugin 'bling/vim-airline'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-surround'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-commentary'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
-
-"session support 
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
 
 "code navigaiton
 Plugin 'easymotion/vim-easymotion'
@@ -32,21 +29,13 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'kristijanhusak/vim-hybrid-material'
-
-"gc to comment a block in visual 
-"gcc to comment a line
-Plugin 'tpope/vim-commentary'
-
-
-Plugin 'chriskempson/vim-tomorrow-theme'
 
 call vundle#end()
 filetype plugin indent on
 
-" ________________________________________________
+"
 " COMMON SETTINGS
-" ________________________________________________
+"
 
 syntax on
 
@@ -86,13 +75,18 @@ set cursorline
 set nojoinspaces
 set list listchars=tab:»·,trail:·,nbsp:·
 
-" same buffer in all windows
-" set clipboard=unnamedplus
-" ________________________________________________
-" PLUGINS SETTINGS !
-" ________________________________________________
+"disable sound bells
+set vb
 
+" same buffer in all windows
+set clipboard=unnamed
+
+" ??
 set viewoptions=cursor,folds,slash,unix
+
+"
+" PLUGIN SETTINGS
+"
 
 "eslint
 let g:syntastic_check_on_open=1
@@ -107,10 +101,6 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_powerline_fonts = 1
-
-"vim sessions settings
-let g:session_autosave = 'yes'
-let g:session_autoload = 'no'
 
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
@@ -133,6 +123,8 @@ noremap <leader>v <C-w>v
 
 "swap between vertical tabs
 nnoremap <C-W> <C-W><C-W>
+nnoremap <leader>k <C-W>l
+nnoremap <leader>j <C-W>h
 
 map <C-t> :NERDTreeToggle<CR>
 
@@ -148,6 +140,9 @@ nmap <C-j> :bp<CR>
 "stop highlighting the search results
 nmap <esc> :noh<CR>
 
+" close file but not split
+nmap <leader>d :b#<bar>bd#<CR>
+
 "easymotion on ctrl+s
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 map <C-s> <Plug>(easymotion-bd-f)
@@ -156,27 +151,10 @@ nmap <C-s> <Plug>(easymotion-overwin-f)
 "support russian keymap
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLMNOPQRSTUVWXYZ:,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
-
-" ________________________________________________
+"
 " VISUAL SETTINGS
-" ________________________________________________
+"
 
 let g:airline_theme='hybrid'
 set background=dark
 colorscheme hybrid
-
-nmap ,d :b#<bar>bd#<CR>
-set clipboard=unnamed
-
-" check if project has his own vim config
-let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-if matchstr(local_eslint, "^\/\\w") == ''
-    let local_eslint = getcwd() . "/" . local_eslint
-endif
-if executable(local_eslint)
-    let g:syntastic_javascript_eslint_exec = local_eslint
-endif
-
-"disable sound bells
-set vb
-
