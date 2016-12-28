@@ -12,10 +12,13 @@ Plugin 'VundleVim/Vundle.vim'
 "must have
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neocomplete.vim' "might be change to another autocomplete plugin
 Plugin 'tpope/vim-surround'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
+Plugin 'mhinz/vim-grepper'
+Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'tpope/vim-fugitive'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
@@ -79,6 +82,7 @@ set list listchars=tab:»·,trail:·,nbsp:·
 set vb
 
 " same buffer in all windows
+" set clipboard="reattach-to-user-namespace pbcopy"
 set clipboard=unnamed
 
 " ??
@@ -89,15 +93,14 @@ set viewoptions=cursor,folds,slash,unix
 "
 
 "eslint
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq = 1
+" let g:syntastic_check_on_open=1
 let g:jsx_ext_required = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exec = 'eslint'
 
 "airline stuff
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#whitespace#enabled = 0
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_powerline_fonts = 1
@@ -106,25 +109,49 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
 let NERDTreeQuitOnOpen=1
+let g:NERDTreeMinimalUI = 1 "Minimalistic nerd tree
 
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-" ________________________________________________
+"ctrlp
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|ios\|android\'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+"grepper
+runtime autoload/grepper.vim
+let g:grepper.grep = { 'grepprg': 'grep -Rn --exclude-dir={node_modules,dist,build,android,ios} $* .' }
+
+"
 " KEY BINDINGS
-" ________________________________________________
+"
 
 let mapleader=","
 
-"create vsplit
+"create vertical split
 noremap <leader>v <C-w>v
+"create horizontal split
+noremap <leader>b <C-w>S
+"close split
+noremap <leader>x :bd<CR>
 
-"swap between vertical tabs
+"split focus switching
 nnoremap <C-W> <C-W><C-W>
-nnoremap <leader>k <C-W>l
-nnoremap <leader>j <C-W>h
+nnoremap <C-H> <C-W>h
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+
+"grepper
+nnoremap <C-G> :Grepper<CR>
+
+"tabs switching
+nmap <C-O> :bn<CR>
+nmap <C-I> :bp<CR>
 
 map <C-t> :NERDTreeToggle<CR>
 
@@ -133,14 +160,10 @@ nnoremap ; :
 vnoremap ; :
 inoremap jf <esc>
 
-"tabs switching
-nmap <C-k> :bn<CR>
-nmap <C-j> :bp<CR>
-
 "stop highlighting the search results
 nmap <esc> :noh<CR>
 
-" close file but not split
+"close file but not split
 nmap <leader>d :b#<bar>bd#<CR>
 
 "easymotion on ctrl+s
@@ -158,3 +181,14 @@ set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯЖ;ABCDEFGHIJKLM
 let g:airline_theme='hybrid'
 set background=dark
 colorscheme hybrid
+
+
+"script from VladimirPal to find local eslint and use it if found
+let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+if matchstr(local_eslint, "^\/\\w") == ''
+    let local_eslint = getcwd() . "/" . local_eslint
+endif
+if executable(local_eslint)
+    let g:syntastic_javascript_eslint_exec = local_eslint
+endif
+

@@ -1,5 +1,4 @@
 # dotfiles
 
-## t0d0:
-### -fuzzy finder
+## T0D0:
 ### -vim+git integration

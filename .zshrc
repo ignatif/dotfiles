@@ -81,4 +81,12 @@ open_by_browser(){ open -a $1 $2}
 alias chrome='open_by_browser "Google Chrome"'
 alias ta='tmux attach -t'
 alias ts='tmux new-session -s'
+alias vim='nvim'
 export PIP_REQUIRE_VIRTUALENV=true
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/ignatif/.sdkman"
+[[ -s "/Users/ignatif/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ignatif/.sdkman/bin/sdkman-init.sh"
