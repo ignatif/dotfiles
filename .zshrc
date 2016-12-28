@@ -87,6 +87,6 @@ export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/ignatif/.sdkman"
 [[ -s "/Users/ignatif/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ignatif/.sdkman/bin/sdkman-init.sh"

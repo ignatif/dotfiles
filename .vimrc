@@ -141,6 +141,9 @@ noremap <leader>x :bd<CR>
 
 "split focus switching
 nnoremap <C-W> <C-W><C-W>
+" if has('nvim') "little hack: https://github.com/neovim/neovim/issues/2048
+"     nmap <BS> <C-W>h
+" endif
 nnoremap <C-H> <C-W>h
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
@@ -150,8 +153,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <C-G> :Grepper<CR>
 
 "tabs switching
-nmap <C-O> :bn<CR>
-nmap <C-I> :bp<CR>
+nmap <S-I> :bn<CR>
+nmap <S-O> :bp<CR>
 
 map <C-t> :NERDTreeToggle<CR>
 
@@ -192,3 +195,6 @@ if executable(local_eslint)
     let g:syntastic_javascript_eslint_exec = local_eslint
 endif
 
+"abbrevs
+iabbrev porpTypes propTypes
+iabbrev boject object
