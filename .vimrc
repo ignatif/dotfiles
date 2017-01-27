@@ -12,12 +12,13 @@ Plugin 'VundleVim/Vundle.vim'
 "must have
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'Shougo/neocomplete.vim' "might be change to another autocomplete plugin
+Plugin 'Shougo/deoplete.nvim'
 Plugin 'tpope/vim-surround'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
 Plugin 'mhinz/vim-grepper'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Architektor/vim-jsx-components' "Script from my bro
 "Plugin 'tpope/vim-fugitive'
 
 "javascript support
@@ -35,6 +36,7 @@ Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()
 filetype plugin indent on
+
 
 "
 " COMMON SETTINGS
@@ -111,9 +113,10 @@ let g:EasyMotion_smartcase = 1
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeMinimalUI = 1 "Minimalistic nerd tree
 
-"neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
+"deoplete complete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 "ctrlp
@@ -121,6 +124,9 @@ let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|ios\|android\'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+"matchit(navigation in XML on '%')
+runtime macros/matchit.vim
 
 "grepper
 runtime autoload/grepper.vim
@@ -130,7 +136,8 @@ let g:grepper.grep = { 'grepprg': 'grep -Rn --exclude-dir={node_modules,dist,bui
 " KEY BINDINGS
 "
 
-let mapleader=","
+let mapleader="\<Space>"
+map , <leader>
 
 "create vertical split
 noremap <leader>v <C-w>v
@@ -153,8 +160,8 @@ nnoremap <C-L> <C-W>l
 nnoremap <C-G> :Grepper<CR>
 
 "tabs switching
-nmap <S-I> :bn<CR>
-nmap <S-O> :bp<CR>
+nmap <leader>k :bn<CR>
+nmap <leader>j :bp<CR>
 
 map <C-t> :NERDTreeToggle<CR>
 
@@ -187,14 +194,26 @@ colorscheme hybrid
 
 
 "script from VladimirPal to find local eslint and use it if found
-let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-if matchstr(local_eslint, "^\/\\w") == ''
-    let local_eslint = getcwd() . "/" . local_eslint
-endif
-if executable(local_eslint)
-    let g:syntastic_javascript_eslint_exec = local_eslint
-endif
+" function! ConfigureLocalEsLint()
+"     let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
+"     if matchstr(local_eslint, "^\/\\w") == ''
+"         let local_eslint = getcwd() . "/" . local_eslint
+"     endif
+"     if executable(local_eslint)
+"         let g:syntastic_javascript_eslint_exec = local_eslint
+"     endif
+" endfunction
+
+" call ConfigureLocalEsLint()
+
+" :autocmd BufEnter * call ConfigureLocalEsLint()
 
 "abbrevs
 iabbrev porpTypes propTypes
 iabbrev boject object
+
+autocmd FileType javascript set formatprg=prettier\ --stdin
+
+let g:python_host_prog = '/usr/bin/python'
+" let g:python2_host_prog = '/usr/bin/python27'
+" let g:python3_host_prog = '/usr/bin/python3.5'
