@@ -211,9 +211,3 @@ colorscheme hybrid
 "abbrevs
 iabbrev porpTypes propTypes
 iabbrev boject object
-
-autocmd FileType javascript set formatprg=prettier\ --stdin
-
-let g:python_host_prog = '/usr/bin/python'
-" let g:python2_host_prog = '/usr/bin/python27'
-" let g:python3_host_prog = '/usr/bin/python3.5'
