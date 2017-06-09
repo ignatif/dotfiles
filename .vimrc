@@ -18,13 +18,14 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
 Plugin 'mhinz/vim-grepper'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'w0rp/ale'
 Plugin 'Architektor/vim-jsx-components' "Script from my bro
 "Plugin 'tpope/vim-fugitive'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 
 "code navigaiton
 Plugin 'easymotion/vim-easymotion'
@@ -211,3 +212,7 @@ colorscheme hybrid
 "abbrevs
 iabbrev porpTypes propTypes
 iabbrev boject object
+iabbrev taget target
+
+" C# shit
+autocmd Filetype cs setlocal ts=2 sts=2 sw=2 noexpandtab
