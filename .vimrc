@@ -199,3 +199,9 @@ autocmd Filetype cs setlocal ts=2 sts=2 sw=2 noexpandtab
 au BufNewFile,BufReadPost *.js set filetype=javascript.jsx
 
 let g:deoplete#enable_at_startup = 1
+
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fix_on_save = 1
