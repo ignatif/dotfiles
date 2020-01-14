@@ -18,14 +18,14 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-commentary'
 Plugin 'mhinz/vim-grepper'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'w0rp/ale'
-Plugin 'Architektor/vim-jsx-components' "Script from my bro
+Plugin 'w0rp/ale' " eslint
+Plugin 'ignatif/vim-jsx-components' "Script from my bro
+Plugin 'jparise/vim-graphql'
 "Plugin 'tpope/vim-fugitive'
 
 "javascript support
 Bundle 'mxw/vim-jsx'
 Bundle 'pangloss/vim-javascript'
-" Plugin 'scrooloose/syntastic'
 
 "code navigaiton
 Plugin 'easymotion/vim-easymotion'
@@ -51,8 +51,8 @@ set nowritebackup
 set nobackup
 
 "text wrap at 100
-set textwidth=100
-set colorcolumn=100
+set textwidth=72
+set colorcolumn=72
 set number
 
 set laststatus=2
@@ -95,12 +95,6 @@ set viewoptions=cursor,folds,slash,unix
 " PLUGIN SETTINGS
 "
 
-"eslint
-" let g:syntastic_check_on_open=1
-let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exec = 'eslint'
-
 "airline stuff
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#whitespace#enabled = 0
@@ -131,6 +125,7 @@ runtime macros/matchit.vim
 
 "grepper
 runtime autoload/grepper.vim
+let g:grepper = {}
 let g:grepper.grep = { 'grepprg': 'grep -Rn --exclude-dir={node_modules,dist,build,android,ios} $* .' }
 
 "
@@ -193,22 +188,6 @@ let g:airline_theme='hybrid'
 set background=dark
 colorscheme hybrid
 
-
-"script from VladimirPal to find local eslint and use it if found
-" function! ConfigureLocalEsLint()
-"     let local_eslint = finddir('node_modules', '.;') . '/.bin/eslint'
-"     if matchstr(local_eslint, "^\/\\w") == ''
-"         let local_eslint = getcwd() . "/" . local_eslint
-"     endif
-"     if executable(local_eslint)
-"         let g:syntastic_javascript_eslint_exec = local_eslint
-"     endif
-" endfunction
-
-" call ConfigureLocalEsLint()
-
-" :autocmd BufEnter * call ConfigureLocalEsLint()
-
 "abbrevs
 iabbrev porpTypes propTypes
 iabbrev boject object
@@ -216,3 +195,7 @@ iabbrev taget target
 
 " C# shit
 autocmd Filetype cs setlocal ts=2 sts=2 sw=2 noexpandtab
+
+au BufNewFile,BufReadPost *.js set filetype=javascript.jsx
+
+let g:deoplete#enable_at_startup = 1
